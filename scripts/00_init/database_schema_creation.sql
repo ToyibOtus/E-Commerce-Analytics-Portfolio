@@ -13,6 +13,10 @@ Schemas Created:
 	bronze
 	silver
 	gold
+
+Warning:
+	Running this script permanently deletes database [SalesDB] along
+	with all data in it. Ensure to have proper backup before running.
 =====================================================================
 */
 -- Use master database
