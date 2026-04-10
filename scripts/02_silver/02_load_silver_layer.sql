@@ -31,7 +31,6 @@ CREATE OR ALTER PROCEDURE silver.load_silver_layer AS
 BEGIN
 	SET NOCOUNT ON;
 
-
 	PRINT('======================================================');
 	PRINT('LOADING SILVER LAYER');
 	PRINT('======================================================');
