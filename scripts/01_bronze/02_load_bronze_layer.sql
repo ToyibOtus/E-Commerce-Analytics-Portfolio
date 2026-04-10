@@ -175,9 +175,10 @@ BEGIN
 		SET @batch_end_time = GETDATE();
 
 		PRINT('======================================================');
-		PRINT('LOADING BRONZE LAYER COMPLETED                       ');
+		PRINT('LOADING BRONZE LAYER COMPLETED                        ');
+		PRINT('======================================================');
 		PRINT('Total Batch Duration: ' + CAST(DATEDIFF(second, @batch_start_time, @batch_end_time) AS NVARCHAR) + ' seconds');
-	PRINT('======================================================');
+		PRINT('------------------------------------------------------');
 	END TRY
 
 	BEGIN CATCH
