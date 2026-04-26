@@ -132,7 +132,7 @@ UNION
 SELECT 'Total Customers Ordered', COUNT(DISTINCT customer_key) FROM gold.fact_orders;
 
 
--- What is the statistical distribution of sales amounts?
+-- What is the statistical distribution of sales amounts across transactions?
 -- Is the mean a reliable measure of central tendency for sales? 
 WITH quartile AS
 (
@@ -166,44 +166,6 @@ SELECT
 	quartile_3 - quartile_1 AS iqr,
 	quartile_1 - (1.5 * (quartile_3 - quartile_1)) AS lower_boundary,
 	quartile_3 + (1.5 * (quartile_3 - quartile_1)) AS upper_boundary
-FROM metrics;
-
-
--- What is the statistical distribution of cost?
--- Is the mean a reliable measure of central tendency for cost?
-WITH quartile AS
-(
-SELECT
-	cost,
-	NTILE(4) OVER(ORDER BY cost) AS quartile
-FROM gold.dim_products
-WHERE cost IS NOT NULL
-)
-, metrics AS
-(
-SELECT
-	MIN(cost) AS min_cost,
-	MAX(cost) AS max_cost,
-	AVG(cost) AS avg_cost,
-	ROUND(STDEV(CAST(cost AS FLOAT)), 2) AS stdev_cost,
-	ROUND((STDEV(CAST(cost AS FLOAT))/AVG(cost)) * 100, 2) AS cv_cost,
-	MAX(CASE WHEN quartile = 1 THEN cost ELSE NULL END) AS quartile_1,
-	MAX(CASE WHEN quartile = 2 THEN cost ELSE NULL END) AS median,
-	MAX(CASE WHEN quartile = 3 THEN cost ELSE NULL END) AS quartile_3
-FROM quartile
-)
-SELECT
-	min_cost,
-	max_cost,
-	avg_cost,
-	stdev_cost,
-	cv_cost,
-	quartile_1,
-	median,
-	quartile_3,
-	quartile_3 - quartile_1 AS iqr,
-	quartile_1 - (1.5 *(quartile_3 - quartile_1)) AS lower_boundary,
-	quartile_3 + (1.5 *(quartile_3 - quartile_1)) AS upper_boundary
 FROM metrics;
 
 
@@ -254,3 +216,34 @@ SELECT
 	ROUND((CAST(SUM(CASE WHEN fo.sales_amount > sd.upper_boundary THEN fo.sales_amount ELSE NULL END) AS FLOAT)/SUM(fo.sales_amount)) * 100, 2) AS outlier_revenue_pct
 FROM gold.fact_orders fo
 CROSS JOIN sales_dist sd;
+
+
+
+-- What is the statistical distribution of profit margin across products?
+-- Is the mean a reliable measure of central tendency for profit margin?
+SELECT
+	MAX(profit_margin) AS max_profit_margin,
+	MIN(profit_margin) AS min_profit_margin,
+	ROUND(CAST(AVG(profit_margin) AS FLOAT), 2) AS avg_profit_margin,
+	ROUND(CAST(STDEV(profit_margin) AS FLOAT), 2) AS stdev_pm,
+	ROUND((CAST(STDEV(profit_margin) AS FLOAT)/AVG(profit_margin)) * 100, 2) AS cv_pm,
+	MAX(CASE WHEN quartile = 1 THEN profit_margin ELSE NULL END) AS p25,
+	MAX(CASE WHEN quartile = 2 THEN profit_margin ELSE NULL END) AS p50,
+	MAX(CASE WHEN quartile = 3 THEN profit_margin ELSE NULL END) AS p75
+FROM
+(
+SELECT
+	product_name,
+	profit_margin,
+	NTILE(4) OVER(ORDER BY profit_margin) AS quartile
+FROM
+(
+SELECT 
+	dp.product_name,
+	ROUND(((CAST(SUM(fo.sales_amount) - SUM(dp.cost * fo.quantity) AS FLOAT))/SUM(fo.sales_amount)) * 100, 2) AS profit_margin
+FROM gold.fact_orders fo 
+LEFT JOIN gold.dim_products dp 
+ON fo.product_key = dp.product_key
+GROUP BY dp.product_name
+)SUB1
+)SUB2;
