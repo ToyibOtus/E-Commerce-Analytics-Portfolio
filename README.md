@@ -5,138 +5,176 @@
 > integrated analytical system — uncovering revenue patterns, customer segments, and
 > product trends through rigorous SQL analysis and Tableau visualisation.
 
----
-
-## 📌 Project Overview
-
-This is an end-to-end data analytics portfolio project built to mirror industry standards.
-Starting from six raw CSV files spanning two source systems (CRM and ERP), the project
-progresses through data cleaning, integration, exploratory analysis, and advanced analytics —
-culminating in a set of executive-level Tableau dashboards.
-
-The dataset covers **60,000+ e-commerce transactions** across a **4-year period (2010–2014)**,
-with records spanning customers, products, sales, and geography.
-
-**Core objectives:**
-- Apply rigorous data quality checks and resolve real-world data inconsistencies
-- Build a clean, integrated analytical layer from multi-source raw data
-- Develop strong statistical intuition through applied exploratory analysis
-- Answer meaningful business questions using advanced SQL analytical techniques
-- Communicate findings through professional Tableau dashboards
 
 ---
 
-## 🗂️ Repository Structure
+## Project Overview
 
-```
-├── datasets/                  # Raw source CSV files (CRM + ERP)
-│   ├── cust_info.csv
-│   ├── prd_info.csv
-│   ├── sales_details.csv
-│   ├── CUST_AZ12.csv
-│   ├── LOC_A101.csv
-│   └── PX_CAT_G1V2.csv
-│
-├── scripts/                   # All SQL scripts, organised by phase
-│   ├── 01_data_loading/       # Bulk load scripts for all source tables
-│   ├── 02_data_cleaning/      # Cleaning views and transformation logic
-│   ├── 03_data_integration/   # Unified dimension and fact views
-│   ├── 04_eda/                # Exploratory data analysis queries
-│   └── 05_advanced_analytics/ # Advanced analytics and reporting queries
-│
-├── tests/                     # Data quality validation scripts
-│
-├── docs/                      # Data dictionary, methodology notes
-│
-├── reports/                   # Tableau exports, PDF summaries, final report
-│
-└── README.md
-```
+This is an end-to-end data analytics portfolio project built to mirror industry standards. Starting from six raw CSV files spanning two source systems (CRM and ERP), the project progresses through data engineering, statistical exploration, and advanced analytics, culminating in a set of executive-level Tableau dashboards.
+
+The dataset covers **60,000+ e-commerce transactions** across a **4-year period (2010–2014)**, with records spanning customers, products, sales, and geography.
 
 ---
 
-## 🛠️ Tools & Technologies
-
-| Tool | Purpose |
-|---|---|
-| **SQL Server** | Data storage, cleaning, integration, and all analytics |
-| **Tableau** | Interactive dashboards and data visualisation |
-| **GitHub** | Version control and project documentation |
-
----
-
-## 📂 Data Sources
+## Data Sources
 
 The project draws from two simulated source systems:
 
 **CRM System** — 3 files
+
 | File | Description | Rows |
 |---|---|---|
-| `cust_info.csv` | Customer demographics and profile data | 18,493 |
-| `prd_info.csv` | Product catalogue with pricing and categorisation | 397 |
-| `sales_details.csv` | Transactional sales records | 60,398 |
+| cust_info.csv | Customer demographics and profile data | 18,000+ |
+| prd_info.csv | Product catalogue with pricing and categorisation | 397 |
+| sales_details.csv | Transactional sales records | 60,000+ |
 
 **ERP System** — 3 files
+
 | File | Description | Rows |
 |---|---|---|
-| `CUST_AZ12.csv` | Customer date of birth and gender | 18,484 |
-| `LOC_A101.csv` | Customer country/location data | 18,484 |
-| `PX_CAT_G1V2.csv` | Product category and subcategory mapping | 37 |
+| CUST_AZ12.csv | Customer date of birth and gender | 18,000+ |
+| LOC_A101.csv | Customer country and location data | 18,000+ |
+| PX_CAT_G1V2.csv | Product category and subcategory mapping | 37 |
 
 ---
 
-## 🔍 Project Phases
+## Project Requirements
+
+### Specifications
+
+- **Data Sources**: Six raw CSV files from two source systems (CRM and ERP) simulating a real-world multi-system e-commerce environment
+- **Data Ingestion**: Load raw data into the data warehouse exactly as-is, preserving source integrity for traceability and debugging
+- **Data Transformation**: Clean, standardise, and enrich raw data into an analytical-ready format, resolving all quality issues identified during inspection
+- **Data Quality Checks**: Validate all transformations before data integration, ensuring no dirty data reaches the analytical layer
+- **Data Integration**: Consolidate data from both source systems into a unified analytical model, resolving key mismatches and structural differences between systems
+- **Exploratory Data Analytics**: Profile the data statistically and dimensionally to understand its shape, distribution, and business characteristics before drawing conclusions
+- **Advanced Analytics**: Apply analytical techniques including trend analysis, performance benchmarking, customer segmentation, and Pareto analysis to generate actionable business intelligence
+- **Documentation**: Provide clear documentation including a data dictionary, architecture diagrams, and inline SQL commentary for both technical and non-technical audiences
+
+---
+
+## Data Architecture
+
+This project is built on the **Medallion Architecture**, a three-layer design that progressively refines raw data into clean, integrated, and business-ready information.
+
+![Data Architecture](docs/01_data_architecture.png)
+
+| Layer | Object Type | Objective |
+|---|---|---|
+| **Bronze** | Tables | Raw data loaded as-is — traceability & debugging |
+| **Silver** | Tables | Cleaned, standardised, and enriched data |
+| **Gold** | Views | Business-ready Star Schema for BI & reporting |
+
+---
+
+## Data Flow
+
+Data moves unidirectionally through the layers. Bronze feeds Silver,
+Silver feeds Gold. No layer reads from a layer above it.
+
+![Data Flow](docs/02_data_flow.png)
+
+---
+
+## Data Integration Model
+
+The data integration model illustrates how the six source tables across the CRM and ERP systems relate to each other, and how they are joined to form the unified gold layer.
+
+![Data Integration Model](docs/03_data_integration.png)
+
+---
+
+## Data Model
+
+The gold layer is structured as a **Star Schema** — `gold.fact_orders` at the centre, joined to `gold.dim_customers` and `gold.dim_products`.
+
+![Data Model](docs/04_data_model.png)
+
+---
+
+## Project Phases
 
 ### Phase 1 — Project Setup
-GitHub repository initialisation, folder structure, branch strategy, and README.
+Repository initialisation, folder structure, branch strategy, and project documentation.
 
-### Phase 2 — Database Setup & Data Loading
-SQL Server database creation and bulk loading of all six source CSV files into raw staging tables.
+### Phase 2 — Data Loading
+All six CSV files loaded into bronze staging tables via a stored procedure with embedded logging — capturing load duration, row counts, and error details per table.
 
 ### Phase 3 — Data Quality Checks & Cleaning
-Systematic identification and resolution of data quality issues including null handling,
-date format standardisation, whitespace trimming, gender value normalisation, and
-sales integrity validation.
+Systematic identification and resolution of data quality issues across all six source tables — including null handling, date format conversion, whitespace trimming, gender standardisation, customer deduplication, product history correction, and sales integrity validation. A dedicated test script validates every silver layer output before integration proceeds.
 
 ### Phase 4 — Data Integration
-Key harmonisation across CRM and ERP sources, and construction of unified dimension
-and fact views — forming the analytical foundation for all subsequent analysis.
+CRM and ERP source systems joined into a unified analytical model. Key format mismatches resolved, product category bridge built, and dimension and fact views created as the gold layer foundation.
 
-### Phase 5a — Exploratory Data Analytics (EDA)
-Structured exploration covering database profiling, date ranges, dimension cardinality,
-measure distributions, magnitude analysis, and ranking analysis. Statistical techniques
-applied include descriptive statistics, distribution analysis, percentiles, and outlier detection.
+### Phase 5a — Exploratory Data Analytics
+Six structured explorations across the gold layer — database profiling, date range analysis, dimension cardinality, descriptive statistics, magnitude analysis, and ranking analysis. Statistical techniques applied include distribution analysis, percentile profiling, IQR-based outlier detection, and Coefficient of Variation testing.
 
 ### Phase 5b — Advanced Data Analytics
-Business-focused analytical techniques including change-over-time analysis, cumulative
-revenue tracking, performance benchmarking, customer segmentation (RFM), part-to-whole
-analysis, and cohort/retention analysis.
+Six analytical techniques applied to surface deeper business insights:
+
+- **Change-Over-Time Analysis** — yearly and monthly performance trends with YoY growth rates and a 3-month moving average to reveal the underlying business trend
+- **Cumulative Analysis** — running revenue and profit totals showing how fast the business compounds value over time
+- **Performance Analysis** — products and countries benchmarked against their own historical averages and against the overall catalogue; customer retention rate tracked year over year
+- **Data Segmentation** — customers and products classified using a composite performance score and an RFM model calibrated to the durable goods nature of the business
+- **Part-to-Whole Analysis** — Pareto validation, revenue concentration by category and country, and customer distribution across behavioural segments
+- **Report Views** — `gold.customer_report` and `gold.product_report` consolidating all metrics and segment labels as Tableau-ready analytical objects
 
 ### Phase 6 — Tableau Dashboards
-Three executive-level dashboards:
-- **Sales Overview** — Revenue trends, KPIs, and year-over-year performance
-- **Customer Dashboard** — Segments, demographics, geography, and RFM analysis
-- **Product Dashboard** — Category performance, rankings, and revenue share
+⏳ In progress — coming soon.
 
 ---
 
-## 📈 Status
+## Tools & Technologies
+
+| Tool | Purpose |
+|---|---|
+| **SQL Server** | Database engine — data storage, transformation, and all analytics |
+| **SSMS** | Interface for interacting with SQL Server |
+| **Tableau** | Interactive executive dashboards (coming soon) |
+| **GitHub** | Version control and project documentation |
+| **Draw.io** | Architecture, data flow, integration model, and data model diagrams |
+| **Notion** | Project planning and task management |
+
+---
+
+## Project Status
 
 | Phase | Status |
 |---|---|
 | Phase 1 — Project Setup | ✅ Complete |
-| Phase 2 — Data Loading | 🔄 In Progress |
-| Phase 3 — Data Cleaning | ⏳ Pending |
-| Phase 4 — Data Integration | ⏳ Pending |
-| Phase 5a — EDA | ⏳ Pending |
-| Phase 5b — Advanced Analytics | ⏳ Pending |
-| Phase 6 — Tableau Dashboards | ⏳ Pending |
+| Phase 2 — Data Loading | ✅ Complete |
+| Phase 3 — Data Quality & Cleaning | ✅ Complete |
+| Phase 4 — Data Integration | ✅ Complete |
+| Phase 5a — Exploratory Data Analytics | ✅ Complete |
+| Phase 5b — Advanced Analytics | ✅ Complete |
+| Phase 6 — Tableau Dashboards | ⏳ In Progress |
 
 ---
 
-## 👤 Author
-Hi there! I'm **Otusanya Toyib Oluwatimilehin**, a graduate of Industrial Chemistry graduate from Olabisi Onabanjo University 
-who made a deliberate pivot into data analytics — driven by a passion for turning raw, complex data into decisions that matter.
+## License
 
-<img src="https://cdn-icons-png.flaticon.com/128/724/724664.png" width="18" alt="Phone"/> **07082154436** 
-<img src="https://cdn-icons-png.flaticon.com/128/732/732200.png" width="18" alt="E-mail"/> **toyibotusanya@gmail.com**
+This project is licensed under the **MIT License**. You are free to use, modify, or share with proper attribution.
+
+---
+
+## About Me
+
+Hi there! I'm **Otusanya Toyib Oluwatimilehin**, an Industrial Chemistry graduate from Olabisi Onabanjo University who made a deliberate pivot into data analytics — driven by a passion for turning raw, complex data into decisions that matter.
+
+With a scientific background that sharpened my analytical thinking and attention to detail, I've been building practical, industry-standard skills across SQL, Tableau, and data modelling. This project represents that journey in action — not just learning tools, but applying them to real business problems the way a professional analyst would.
+
+I'm currently seeking data analyst and data engineering roles where I can contribute rigorous thinking, clean analysis, and clear communication of insights.
+
+📧 toyibotusanya@gmail.com
+📞 07082154436
+
+
+
+
+
+
+
+
+
+
+
