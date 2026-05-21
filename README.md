@@ -138,6 +138,8 @@ Two interactive Tableau dashboards built directly on the gold report views, desi
 
 ![Customer Performance Dashboard](reports/02_customer_performance_dashboard.png)
 
+**Live Version:** https://public.tableau.com/views/SalesDashboard_17701396592030/SalesDashboard?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+
 ---
 
 ## Project Status
