@@ -108,12 +108,6 @@ Generate SQL and BI reports that draw insight into:
 
 Two interactive Tableau dashboards built directly on the gold report views, designed to give stakeholders a clear, executive-level view of product performance and customer behaviour across the 4-year sales period.
 
-### Dashboard Architecture
-
-The dashboard layout was planned before building — both dashboards follow the same container structure for visual consistency.
-
-![Dashboard Architecture](docs/06_dashboard_architecture.png)
-
 ### Sales & Product Performance Dashboard
 
 **Purpose:** Evaluate product profitability, revenue contribution, and margin performance across the active catalogue.
