@@ -53,7 +53,12 @@ The project draws from two simulated source systems:
 
 ---
 
-## Data Architecture
+## 01. Build a Data Warehouse (Data Engineering)
+
+### Objective
+Build a data warehouse that consolidates sales data, and supports data analytics and BI reporting.
+
+### Data Architecture
 
 This project is built on the **Medallion Architecture**, a three-layer design that progressively refines raw data into clean, integrated, and business-ready information.
 
@@ -65,26 +70,20 @@ This project is built on the **Medallion Architecture**, a three-layer design th
 | **Silver** | Tables | Cleaned, standardised, and enriched data |
 | **Gold** | Views | Business-ready Star Schema for BI & reporting |
 
----
-
-## Data Flow
+### Data Flow
 
 Data moves unidirectionally through the layers. Bronze feeds Silver,
 Silver feeds Gold. No layer reads from a layer above it.
 
 ![Data Flow](docs/02_data_flow.png)
 
----
-
-## Data Integration Model
+### Data Integration Model
 
 The data integration model illustrates how the six source tables across the CRM and ERP systems relate to each other, and how they are joined to form the unified gold layer.
 
 ![Data Integration Model](docs/03_data_integration.png)
 
----
-
-## Data Model
+### Data Model
 
 The gold layer is structured as a **Star Schema** — `gold.fact_orders` at the centre, joined to `gold.dim_customers` and `gold.dim_products`.
 
@@ -92,35 +91,56 @@ The gold layer is structured as a **Star Schema** — `gold.fact_orders` at the 
 
 ---
 
-## Project Phases
+## 02. Analytics & BI Reporting (Data Analytics)
 
-### Phase 1 — Project Setup
-Repository initialisation, folder structure, branch strategy, and project documentation.
+This section of the project is divided into two phases **Exploratory Data Analytics (EDA)** and **Advanced Data Analytics**.
 
-### Phase 2 — Data Loading
-All six CSV files loaded into bronze staging tables via a stored procedure with embedded logging — capturing load duration, row counts, and error details per table.
+### Objectives
+Generate SQL and BI reports that draw insight into:
 
-### Phase 3 — Data Quality Checks & Cleaning
-Systematic identification and resolution of data quality issues across all six source tables — including null handling, date format conversion, whitespace trimming, gender standardisation, customer deduplication, product history correction, and sales integrity validation. A dedicated test script validates every silver layer output before integration proceeds.
+* **Product Performance**
+* **Customer Performance**
+* **Sales Trends**
 
-### Phase 4 — Data Integration
-CRM and ERP source systems joined into a unified analytical model. Key format mismatches resolved, product category bridge built, and dimension and fact views created as the gold layer foundation.
+---
 
-### Phase 5a — Exploratory Data Analytics
-Six structured explorations across the gold layer — database profiling, date range analysis, dimension cardinality, descriptive statistics, magnitude analysis, and ranking analysis. Statistical techniques applied include distribution analysis, percentile profiling, IQR-based outlier detection, and Coefficient of Variation testing.
+## Executive Dashboards
 
-### Phase 5b — Advanced Data Analytics
-Six analytical techniques applied to surface deeper business insights:
+Two interactive Tableau dashboards built directly on the gold report views, designed to give stakeholders a clear, executive-level view of product performance and customer behaviour across the 4-year sales period.
 
-- **Change-Over-Time Analysis** — yearly and monthly performance trends with YoY growth rates and a 3-month moving average to reveal the underlying business trend
-- **Cumulative Analysis** — running revenue and profit totals showing how fast the business compounds value over time
-- **Performance Analysis** — products and countries benchmarked against their own historical averages and against the overall catalogue; customer retention rate tracked year over year
-- **Data Segmentation** — customers and products classified using a composite performance score and an RFM model calibrated to the durable goods nature of the business
-- **Part-to-Whole Analysis** — Pareto validation, revenue concentration by category and country, and customer distribution across behavioural segments
-- **Report Views** — `gold.customer_report` and `gold.product_report` consolidating all metrics and segment labels as Tableau-ready analytical objects
+### Dashboard Architecture
 
-### Phase 6 — Tableau Dashboards
-⏳ In progress — coming soon.
+The dashboard layout was planned before building — both dashboards follow the same container structure for visual consistency.
+
+![Dashboard Architecture](docs/06_dashboard_architecture.png)
+
+### Sales & Product Performance Dashboard
+
+**Purpose:** Evaluate product profitability, revenue contribution, and margin performance across the active catalogue.
+
+**Key questions answered:**
+- How has revenue and profit trended year over year?
+- Which categories and subcategories drive the most revenue and profit?
+- Where is margin strength and weakness sitting across the catalogue?
+- Which products are the top contributors to business performance?
+
+**Core metrics:** Total Revenue · Total Profit · Profit Margin · Total Orders
+
+![Sales & Product Performance Dashboard](reports/01_sales_product_performance_dashboard.png)
+
+### Customer Performance Dashboard
+
+**Purpose:** Assess customer profitability, acquisition trends, retention health, and demographic breakdown.
+
+**Key questions answered:**
+- How is the customer base growing and how many are new acquisitions?
+- Which countries and demographics drive the most revenue?
+- Who are our most valuable customers?
+- How are customers distributed across age groups, gender, and marital status?
+
+**Core metrics:** Total Customers · Average Order Value · Average Revenue Per Customer · Acquisition Rate
+
+![Customer Performance Dashboard](reports/02_customer_performance_dashboard.png)
 
 ---
 
@@ -134,7 +154,7 @@ Six analytical techniques applied to surface deeper business insights:
 | Phase 4 — Data Integration | ✅ Complete |
 | Phase 5a — Exploratory Data Analytics | ✅ Complete |
 | Phase 5b — Advanced Analytics | ✅ Complete |
-| Phase 6 — Tableau Dashboards | ⏳ In Progress |
+| Phase 6 — Tableau Dashboards | ✅ Complete |
 
 ---
 
