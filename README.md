@@ -114,8 +114,10 @@ Two interactive Tableau dashboards built directly on the gold report views, desi
 
 **Key questions answered:**
 - How has revenue and profit trended year over year?
+- How does current year revenue and profit compare to previous year's
 - Which categories and subcategories drive the most revenue and profit?
-- Where is margin strength and weakness sitting across the catalogue?
+- How are products distributed across product status & profit margin status?
+- Is most of our profit concentrated on a few products?
 - Which products are the top contributors to business performance?
 
 **Core metrics:** Total Revenue · Total Profit · Profit Margin · Total Orders
@@ -130,7 +132,7 @@ Two interactive Tableau dashboards built directly on the gold report views, desi
 - How is the customer base growing and how many are new acquisitions?
 - Which countries and demographics drive the most revenue?
 - Who are our most valuable customers?
-- How are customers distributed across age groups, gender, and marital status?
+- How are customers distributed across country and gender?
 
 **Core metrics:** Total Customers · Average Order Value · Average Revenue Per Customer · Acquisition Rate
 
