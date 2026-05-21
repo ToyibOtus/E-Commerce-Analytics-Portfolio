@@ -124,19 +124,6 @@ Six analytical techniques applied to surface deeper business insights:
 
 ---
 
-## Tools & Technologies
-
-| Tool | Purpose |
-|---|---|
-| **SQL Server** | Database engine — data storage, transformation, and all analytics |
-| **SSMS** | Interface for interacting with SQL Server |
-| **Tableau** | Interactive executive dashboards (coming soon) |
-| **GitHub** | Version control and project documentation |
-| **Draw.io** | Architecture, data flow, integration model, and data model diagrams |
-| **Notion** | Project planning and task management |
-
----
-
 ## Project Status
 
 | Phase | Status |
@@ -148,6 +135,19 @@ Six analytical techniques applied to surface deeper business insights:
 | Phase 5a — Exploratory Data Analytics | ✅ Complete |
 | Phase 5b — Advanced Analytics | ✅ Complete |
 | Phase 6 — Tableau Dashboards | ⏳ In Progress |
+
+---
+
+## Tools & Technologies
+
+| Tool | Purpose |
+|---|---|
+| **SQL Server** | Database engine — data storage, transformation, and all analytics |
+| **SSMS** | Interface for interacting with SQL Server |
+| **Tableau** | Interactive executive dashboards (coming soon) |
+| **GitHub** | Version control and project documentation |
+| **Draw.io** | Architecture, data flow, integration model, and data model diagrams |
+| **Notion** | Project planning and task management |
 
 ---
 
