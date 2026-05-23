@@ -46,7 +46,7 @@ The project draws from two simulated source systems:
 - **Data Ingestion**: Load raw data into the data warehouse exactly as-is, preserving source integrity for traceability and debugging
 - **Data Transformation**: Clean, standardise, and enrich raw data into an analytical-ready format, resolving all quality issues identified during inspection
 - **Data Quality Checks**: Validate all transformations before data integration, ensuring no dirty data reaches the analytical layer
-- **Data Integration**: Consolidate data from both source systems into a unified analytical model, resolving key mismatches and structural differences between systems
+- **Data Integration**: Consolidate data from both source systems into a unified analytical model
 - **Exploratory Data Analytics**: Profile the data statistically and dimensionally to understand its shape, distribution, and business characteristics before drawing conclusions
 - **Advanced Analytics**: Apply analytical techniques including trend analysis, performance benchmarking, customer segmentation, and Pareto analysis to generate actionable business intelligence
 - **Documentation**: Provide clear documentation including a data dictionary, architecture diagrams, and inline SQL commentary for both technical and non-technical audiences
@@ -126,7 +126,7 @@ Two interactive Tableau dashboards built directly on the gold report views, desi
 
 ### Customer Performance Dashboard
 
-**Purpose:** Assess customer profitability, acquisition trends, retention health, and demographic breakdown.
+**Purpose:** Assess customer profitability, acquisition trends, and demographic breakdown.
 
 **Key questions answered:**
 - How is the customer base growing and how many are new acquisitions?
