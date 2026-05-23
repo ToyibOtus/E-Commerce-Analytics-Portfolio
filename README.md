@@ -162,7 +162,7 @@ Two interactive Tableau dashboards built directly on the gold report views, desi
 |---|---|
 | **SQL Server** | Database engine — data storage, transformation, and all analytics |
 | **SSMS** | Interface for interacting with SQL Server |
-| **Tableau** | Interactive executive dashboards (coming soon) |
+| **Tableau** | Interactive executive dashboards  |
 | **GitHub** | Version control and project documentation |
 | **Draw.io** | Architecture, data flow, integration model, and data model diagrams |
 | **Notion** | Project planning and task management |
