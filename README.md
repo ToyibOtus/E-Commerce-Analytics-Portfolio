@@ -181,7 +181,7 @@ Hi there! I'm **Otusanya Toyib Oluwatimilehin**, an Industrial Chemistry graduat
 
 With a scientific background that sharpened my analytical thinking and attention to detail, I've been building practical, industry-standard skills across SQL, Tableau, and data modelling. This project represents that journey in action — not just learning tools, but applying them to real business problems the way a professional analyst would.
 
-I'm currently seeking data analyst and data engineering roles where I can contribute rigorous thinking, clean analysis, and clear communication of insights.
+I'm currently seeking data analyst roles where I can contribute rigorous thinking, clean analysis, and clear communication of insights.
 
 📧 toyibotusanya@gmail.com
 📞 07082154436
