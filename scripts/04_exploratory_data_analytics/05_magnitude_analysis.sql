@@ -86,7 +86,7 @@ WITH customer_age AS
 (
 SELECT
 	customer_key,
-	DATEDIFF(year, birth_date, GETDATE()) AS age
+	DATEDIFF(year, birth_date, '2014-01-31') AS age
 FROM gold.dim_customers
 )
 -- Segment age into various age groups
@@ -97,10 +97,10 @@ SELECT
 	age,
 	CASE
 		WHEN age < 20 THEN 'Below 20'
-		WHEN age BETWEEN 20 AND 30 THEN '20-30'
-		WHEN age BETWEEN 31 AND 40 THEN '31-40'
-		WHEN age BETWEEN 41 AND 50 THEN '41-50'
-		ELSE 'Above 50'
+		WHEN age BETWEEN 20 AND 29 THEN '20-29'
+		WHEN age BETWEEN 30 AND 39 THEN '30-39'
+		WHEN age BETWEEN 40 AND 49 THEN '40-49'
+		ELSE 'Above 49'
 	END AS age_group
 FROM customer_age
 )
