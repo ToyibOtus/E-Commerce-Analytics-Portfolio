@@ -223,7 +223,7 @@ WITH customer_age AS
 (
 SELECT
 	customer_key,
-	DATEDIFF(year, birth_date, GETDATE()) AS age
+	DATEDIFF(year, birth_date, '2014-01-31') AS age
 FROM gold.dim_customers
 )
 , age_group AS
