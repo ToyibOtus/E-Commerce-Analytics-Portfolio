@@ -132,6 +132,26 @@ UNION
 SELECT 'Total Customers Ordered', COUNT(DISTINCT customer_key) FROM gold.fact_orders;
 
 
+-- How many percent of our of product catalog has never been ordered? 
+WITH product_metrics AS
+(
+SELECT 
+	COUNT(DISTINCT dp.product_key) AS total_products,
+	COUNT(DISTINCT fo.product_key) AS products_ordered,
+	COUNT(DISTINCT dp.product_key) - COUNT(DISTINCT fo.product_key) AS products_not_ordered
+FROM gold.dim_products dp
+LEFT JOIN gold.fact_orders fo
+ON dp.product_key = fo.product_key
+)
+SELECT
+	total_products,
+	products_ordered,
+	products_not_ordered,
+	ROUND((CAST(products_ordered AS FLOAT)/total_products) * 100, 2) AS pct_products_ordered,
+	ROUND((CAST(products_not_ordered AS FLOAT)/total_products) * 100, 2) AS pct_products_not_ordered
+FROM product_metrics;
+
+
 -- What is the statistical distribution of sales amounts across transactions?
 -- Is the mean a reliable measure of central tendency for sales? 
 WITH quartile AS
@@ -210,10 +230,10 @@ FROM metrics
 SELECT
 	COUNT(*) AS total_transactions,
 	SUM(fo.sales_amount) AS total_sales,
-	SUM(CASE WHEN fo.sales_amount > sd.upper_boundary THEN fo.sales_amount ELSE NULL END) AS outlier_revenue,
-	COUNT(CASE WHEN fo.sales_amount > sd.upper_boundary THEN fo.sales_amount ELSE NULL END) AS outlier_count,
-	ROUND((CAST(COUNT(CASE WHEN fo.sales_amount > sd.upper_boundary THEN fo.sales_amount ELSE NULL END) AS FLOAT)/COUNT(*)) * 100, 2) AS outlier_count_pct,
-	ROUND((CAST(SUM(CASE WHEN fo.sales_amount > sd.upper_boundary THEN fo.sales_amount ELSE NULL END) AS FLOAT)/SUM(fo.sales_amount)) * 100, 2) AS outlier_revenue_pct
+	SUM(CASE WHEN fo.sales_amount >= sd.upper_boundary THEN fo.sales_amount ELSE NULL END) AS outlier_revenue,
+	COUNT(CASE WHEN fo.sales_amount >= sd.upper_boundary THEN fo.sales_amount ELSE NULL END) AS outlier_count,
+	ROUND((CAST(COUNT(CASE WHEN fo.sales_amount >= sd.upper_boundary THEN fo.sales_amount ELSE NULL END) AS FLOAT)/COUNT(*)) * 100, 2) AS outlier_count_pct,
+	ROUND((CAST(SUM(CASE WHEN fo.sales_amount >= sd.upper_boundary THEN fo.sales_amount ELSE NULL END) AS FLOAT)/SUM(fo.sales_amount)) * 100, 2) AS outlier_revenue_pct
 FROM gold.fact_orders fo
 CROSS JOIN sales_dist sd;
 
