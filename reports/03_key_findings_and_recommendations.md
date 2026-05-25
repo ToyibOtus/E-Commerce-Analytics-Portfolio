@@ -35,7 +35,9 @@ From a product revenue segmentation perspective, 11 products have individually g
 
 ### Recommendations
 
-**Discontinue or review the entire Components category.** 130 products with zero sales over a four-year period represent dead inventory carrying real costs in storage, supplier relationships, and catalogue management. A formal review should determine whether these products serve a strategic purpose — such as supporting after-sales service for bike purchases — or whether they should be delisted entirely.
+**Discontinue or review the entire Components category.** 127 products with zero sales over a four-year period represent dead inventory carrying real costs in storage, supplier relationships, and catalogue management. A formal review should determine whether these products serve a strategic purpose — such as supporting after-sales service for bike purchases — or whether they should be delisted entirely.
+
+**Resolve and review the 7 uncategorised N/A products.** These products have no category assignment and no order history. Before any catalogue rationalisation exercise these products should either be correctly categorised or removed — unclassified products cannot be meaningfully managed or marketed.
 
 **Prioritise the 9 never-ordered Bike products.** Unlike Components, these are in the highest-revenue category and their absence from order history likely reflects a marketing or visibility problem rather than a demand problem. Targeted promotions or bundling with best-selling models could unlock latent demand.
 
