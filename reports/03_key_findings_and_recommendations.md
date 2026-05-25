@@ -63,7 +63,7 @@ At the transactional level, the revenue distribution is heavily right-skewed. Th
 
 **Investigate the pricing strategy that drove 2013 growth.** The dramatic price reduction that preceded the 2013 revenue surge raises a critical question — was this a deliberate strategic decision or an uncontrolled pricing shift? If deliberate, the elasticity of demand at lower price points should be formally modelled to identify the optimal pricing band that maximises revenue rather than just volume.
 
-**Do not rely on average transaction value as a performance metric.** With a coefficient of variation of 191%, the mean is statistically unreliable. Internal reporting should use median transaction value and revenue-per-segment breakdowns rather than averages, which mask the true distribution of order behaviour.
+**Do not rely on average transaction value as a performance metric.** With a coefficient of variation of 191%, the mean is statistically unreliable. Internal reporting should use median transaction value rather than averages, which mask the true distribution of order behaviour.
 
 **Monitor the concentration of annual revenue in 2013.** The fact that 77% of orders and over half of total revenue occurred in a single year is a concentration risk. Whether 2013 represents a structural inflection point or a temporary spike will only become clear with 2014 full-year data — but the business should not plan future resource allocation assuming 2013 performance levels will persist without the conditions that drove them.
 
