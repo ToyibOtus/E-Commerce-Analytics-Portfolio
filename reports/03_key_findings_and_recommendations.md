@@ -19,14 +19,15 @@ More than half the product catalogue has never generated a single order. Of the 
 
 Breaking this down by category reveals the full picture:
 
-| Category | Total Products | Never Ordered | % Never Ordered |
+| Category | Never Ordered | % of Total Portfolio | Notes |
 |---|---|---|---|
-| Components | 130 | 130 | 100.00% |
-| Bikes | 97 | 9 | 9.28% |
-| Accessories | 29 | 7 | 24.14% |
-| Clothing | 35 | 15 | 42.86% |
+| Components | 127 | 43.05% | No product in this category has ever been ordered |
+| N/A  | 7 | 2.37% | Uncategorised products with no order history |
+| Bikes | 9 | 3.05% | Only 9 of 97 Bike products never ordered |
+| Accessories | 7 | 2.37% | 7 of 29 Accessories never ordered |
+| Clothing | 15 | 5.08% | 15 of 35 Clothing products never ordered |
 
-The Components category is the starkest finding — all 130 products in this category have never been ordered, representing 44.10% of the entire product portfolio with zero revenue contribution. Bikes, by contrast, have the strongest catalogue utilisation with only 9 products never ordered.
+The Components category is the starkest finding — 127 of the 165 never-ordered products belong here, accounting for 43.05% of the entire product portfolio with zero revenue contribution across the full four-year period. An additional 7 products with unassigned category labels (N/A) have also never been ordered, bringing the total dead weight to 134 products. Bikes, by contrast, have the strongest catalogue utilisation with only 9 of 97 products never ordered.
 
 Revenue concentration is extreme. Bikes account for **96.46% of total revenue**, leaving Accessories and Clothing as marginal contributors despite representing a meaningful share of the catalogue. Pareto analysis confirms this concentration — 26.92% of ordered products generate 80.84% of total revenue.
 
